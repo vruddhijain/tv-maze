@@ -261,6 +261,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
 
+
                   Padding(
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: ElevatedButton(
@@ -460,7 +461,7 @@ Future api(String tv)async {
   final response = await http.get(url);
 
   final json =jsonDecode(response.body);
-  final output = {"name": json['name'],'apiid':json['id'],'summary':json['summary'],'timezone':json['network']['country']['timezone'],'country':json['network']['country']['name'],'rating':json['rating']['average'],'time':json['schedule']['time'],'day':json['schedule']['days'],'runtime':json['runtime'],'ended':json['ended'],'image':json['image']['original'],"lang":json['language'],'genre':json['genres'],'status':json['status'],'premiered':json['premiered']
+  final output = {"name": json['name'],'apiid':json['id'].toString(),'summary':json['summary'],'timezone':json['network']['country']['timezone'],'country':json['network']['country']['name'],'rating':json['rating']['average'],'time':json['schedule']['time'],'day':json['schedule']['days'],'runtime':json['runtime'],'ended':json['ended'],'image':json['image']['original'],"lang":json['language'],'genre':json['genres'],'status':json['status'],'premiered':json['premiered']
   };
 
   return output;
@@ -478,3 +479,13 @@ Future api2(String tv)async {
 }
 //d23e4bbc6dc29e67a34db53172ec7dc1
 //'imbd':json['externals']['imbd'],
+Future api3(String tv)async {
+  final url = Uri.parse(
+      "https://api.tvmaze.com/shows/$tv/seasons");
+  final response = await http.get(url);
+
+  final json =jsonDecode(response.body);
+
+
+  return json;
+}
