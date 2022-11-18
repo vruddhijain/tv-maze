@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:projectapi/Fourthpage.dart';
 import 'package:projectapi/secondpage.dart';
 import 'package:projectapi/Thirdpage.dart';
 import 'dart:math';
@@ -29,6 +30,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String sn='';
   String id='';
   String TV="";
   String end='';
@@ -259,6 +261,47 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     ),
                   ),
+                  FutureBuilder(
+                      future: api3(id),
+                      builder: (context, snapshot1) {
+                        if (snapshot1.hasData ) {
+                        return  SingleChildScrollView(scrollDirection: Axis.horizontal,child:  Row(
+                          children: [  Row( children: [for(var item1 in snapshot1.data)   if(item1['image']==null)
+                            Container()
+                          else  GestureDetector(
+                              onTap: () {sn=item1['number'].toString();
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context)=>Fourthpage(sn:sn,id:id)));
+                                setState(() {
+
+                                });
+                              },
+                              child: Row(
+                                children: [ Container(width: 20,),
+                                  Container(width: 175,color: Color(0xff63666A),child:Column(
+                                    children: [ Text("Season ${item1['number']}",style: TextStyle(fontWeight: FontWeight.bold),),
+                                      Container(height: 200,width: 200,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(item1['image']['original'])
+                                            )
+                                        ),
+                                        padding: const EdgeInsets.all(8),
+                                        // Change button text when light changes state.
+                                        child: Text(" "),
+                                      ),Text(" ")
+                                    ],
+                                  )),
+                                ],
+                              ),
+                            ),             // Change button text when light changes state.
+
+
+                          ]  ) ],
+                        ));
+
+                      }
+                      else return Container();}),
 
 
 
