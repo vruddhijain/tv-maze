@@ -460,7 +460,7 @@ Future api(String tv)async {
   final response = await http.get(url);
 
   final json =jsonDecode(response.body);
-  final output = {"name": json['name'],'apiid':json['url'].substring(29,31),'summary':json['summary'],'timezone':json['network']['country']['timezone'],'country':json['network']['country']['name'],'rating':json['rating']['average'],'time':json['schedule']['time'],'day':json['schedule']['days'],'runtime':json['runtime'],'ended':json['ended'],'image':json['image']['original'],"lang":json['language'],'genre':json['genres'],'status':json['status'],'premiered':json['premiered']
+  final output = {"name": json['name'],'apiid':json['id'],'summary':json['summary'],'timezone':json['network']['country']['timezone'],'country':json['network']['country']['name'],'rating':json['rating']['average'],'time':json['schedule']['time'],'day':json['schedule']['days'],'runtime':json['runtime'],'ended':json['ended'],'image':json['image']['original'],"lang":json['language'],'genre':json['genres'],'status':json['status'],'premiered':json['premiered']
   };
 
   return output;
